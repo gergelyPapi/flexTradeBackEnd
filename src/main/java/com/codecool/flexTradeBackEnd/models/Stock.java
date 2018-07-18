@@ -1,6 +1,9 @@
 package com.codecool.flexTradeBackEnd.models;
 
 import javax.persistence.*;
+import java.sql.Time;
+import java.sql.Timestamp;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -20,27 +23,30 @@ public class Stock {
     private String compName;
 
     @Column(nullable = false)
-    private Float workingCapitalRatio;
+    private Double workingCapitalRatio;
 
     @Column(nullable = false)
-    private Float earningsPerShare;
+    private Double earningsPerShare;
 
     @Column(nullable = false)
-    private Float priceEarningsRatio;
+    private Double priceEarningsRatio;
 
     @Column(nullable = false)
-    private Float debtEquityRatio;
+    private Double debtEquityRatio;
 
     @Column(nullable = false)
-    private Float returnOnEquity;
+    private Double returnOnEquity;
+
+    @Column(name = "DATE_FIELD")
+    private java.sql.Date dateField;
 
     @ManyToMany(mappedBy = "stocks")
     private Set<User> users = new HashSet<>();
 
     public Stock() { }
 
-    public Stock(String stockCode, String compName, Float workingCapitalRatio, Float earningsPerShare,
-                 Float priceEarningsRatio, Float debtEquityRatio, Float returnOnEquity) {
+    public Stock(String stockCode, String compName, Double workingCapitalRatio, Double earningsPerShare,
+                 Double priceEarningsRatio, Double debtEquityRatio, Double returnOnEquity) {
         this.stockCode = stockCode;
         this.compName = compName;
         this.workingCapitalRatio = workingCapitalRatio;
@@ -48,6 +54,7 @@ public class Stock {
         this.priceEarningsRatio = priceEarningsRatio;
         this.debtEquityRatio = debtEquityRatio;
         this.returnOnEquity = returnOnEquity;
+        this.dateField = new java.sql.Date(new Date().getTime());
     }
 
     public int getId() {
@@ -74,44 +81,52 @@ public class Stock {
         this.compName = compName;
     }
 
-    public Float getWorkingCapitalRatio() {
+    public Double getWorkingCapitalRatio() {
         return workingCapitalRatio;
     }
 
-    public void setWorkingCapitalRatio(Float workingCapitalRatio) {
+    public void setWorkingCapitalRatio(Double workingCapitalRatio) {
         this.workingCapitalRatio = workingCapitalRatio;
     }
 
-    public Float getEarningsPerShare() {
+    public Double getEarningsPerShare() {
         return earningsPerShare;
     }
 
-    public void setEarningsPerShare(Float earningsPerShare) {
+    public void setEarningsPerShare(Double earningsPerShare) {
         this.earningsPerShare = earningsPerShare;
     }
 
-    public Float getPriceEarningsRatio() {
+    public Double getPriceEarningsRatio() {
         return priceEarningsRatio;
     }
 
-    public void setPriceEarningsRatio(Float priceEarningsRatio) {
+    public void setPriceEarningsRatio(Double priceEarningsRatio) {
         this.priceEarningsRatio = priceEarningsRatio;
     }
 
-    public Float getDebtEquityRatio() {
+    public Double getDebtEquityRatio() {
         return debtEquityRatio;
     }
 
-    public void setDebtEquityRatio(Float debtEquityRatio) {
+    public void setDebtEquityRatio(Double debtEquityRatio) {
         this.debtEquityRatio = debtEquityRatio;
     }
 
-    public Float getReturnOnEquity() {
+    public Double getReturnOnEquity() {
         return returnOnEquity;
     }
 
-    public void setReturnOnEquity(Float returnOnEquity) {
+    public void setReturnOnEquity(Double returnOnEquity) {
         this.returnOnEquity = returnOnEquity;
+    }
+
+    public java.sql.Date getDateField() {
+        return dateField;
+    }
+
+    public void setDateField(java.sql.Date dateField) {
+        this.dateField = dateField;
     }
 
     public Set<User> getUsers() {
