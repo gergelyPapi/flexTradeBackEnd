@@ -41,7 +41,6 @@ public class UserService {
 
     public List<User> getAllUser() {
         List<User> allUsers = null;
-        System.out.println(allUsers.toString());
         allUsers = userRepository.findAll();
         return allUsers;
     }

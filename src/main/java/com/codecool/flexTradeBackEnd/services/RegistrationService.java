@@ -11,7 +11,10 @@ import org.springframework.stereotype.Service;
 public class RegistrationService {
 
     @Autowired
-    UserRepository userRepository;
+    private UserRepository userRepository;
+
+    @Autowired
+    private UserService userService;
 
     PasswordHashed bcrypt = new PasswordHashed();
 
@@ -19,5 +22,13 @@ public class RegistrationService {
         String passwordHash = bcrypt.passwordHasher(password);
         User newUser = new User (userName, email, passwordHash, authority);
         userRepository.save(newUser);
+    }
+
+    public void registrationInit () {
+            if (userService.getAllUser().size() <= 0 || userService.getAllUser() == null) {
+                this.registerUser("test1", "test1@gmail.com","123", "Admin");
+                this.registerUser("test2", "test2@gmail.com","1234", "User");
+                this.registerUser("Sanyi", "test3@gmail.com","12345", "User");
+            }
     }
 }
