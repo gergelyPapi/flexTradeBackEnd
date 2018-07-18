@@ -20,7 +20,7 @@ public class NewsController {
     NewsService newsService;
 
     @CrossOrigin("http://localhost:3000")
-    @RequestMapping(value = "/news", method = RequestMethod.GET)
+    @RequestMapping(value = "/get-all-news-entry", method = RequestMethod.GET)
     public ResponseEntity<List<NewsEntry>> getAllNews(HttpSession session){
         List<NewsEntry> allNews;
         allNews = newsService.getAllNews();
