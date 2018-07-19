@@ -16,6 +16,9 @@ public class RegistrationService {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private StockService stockService;
+
     PasswordHashed bcrypt = new PasswordHashed();
 
     public void registerUser (String userName, String email, String password, String authority) {
@@ -29,6 +32,10 @@ public class RegistrationService {
                 this.registerUser("test1", "test1@gmail.com","123", "Admin");
                 this.registerUser("test2", "test2@gmail.com","1234", "User");
                 this.registerUser("Sanyi", "test3@gmail.com","12345", "User");
+
             }
+
+            /*User sanyi = userService.getUserByUserName("Sanyi");
+            System.out.println(sanyi.getStocks());*/
     }
 }
