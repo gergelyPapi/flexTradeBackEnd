@@ -1,5 +1,7 @@
 package com.codecool.flexTradeBackEnd.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.sql.Time;
 import java.sql.Timestamp;
@@ -41,6 +43,7 @@ public class Stock {
     private java.sql.Date dateField;
 
     @ManyToMany(mappedBy = "stocks")
+    @JsonIgnore
     private Set<User> users = new HashSet<>();
 
     public Stock() { }

@@ -8,6 +8,7 @@ import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.PostConstruct;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -41,6 +42,10 @@ public class StockService {
         return allStocksForUser;
     }
 
+    public Stock getStockByStockCode (String stockCode) {
+        return stockRepository.findByStockCode(stockCode);
+    }
+
     public void createNewStockEntry (String stockCode, String compName, Double workingCapitalRatio, Double earningsPerShare,
                                      Double priceEarningsRatio, Double debtEquityRatio, Double returnOnEquity) {
         Stock newStockEntry = new Stock (stockCode, compName, workingCapitalRatio, earningsPerShare,
@@ -57,9 +62,9 @@ public class StockService {
 
     public boolean checkForStockDataRefresh () {
         List <Stock> stockList = this.getAllStocks();
-        for (Stock stock : stockList) {
+        /*for (Stock stock : stockList) {
             System.out.println(stock.getDateField());
-        }
+        }*/
         SimpleDateFormat myFormat = new SimpleDateFormat("dd MM yyyy");
         Date currentDate = new Date();
 //        System.out.println(myFormat.format(currentDate));
@@ -125,5 +130,13 @@ public class StockService {
             System.out.println(e);
         }
         return stockInfo;
+    }
+
+    public void stockInit () {
+        this.addStockToUser("APPL", "Sanyi");
+        this.addStockToUser("GOOG", "Sanyi");
+        this.addStockToUser("PFE", "Sanyi");
+        this.addStockToUser("CVX", "test1");
+        this.addStockToUser("XOM", "test1");
     }
 }
