@@ -72,4 +72,12 @@ public class StockController {
         stockService.addStockToUser(stock_comp_code,user_name);
         return new ResponseEntity<>("OK", HttpStatus.OK);
     }
+
+    @CrossOrigin("http://localhost:3000")
+    @RequestMapping(value = "/remove-stock-from-user/{user_name}/{stock_comp_code}", method = RequestMethod.GET)
+    public ResponseEntity<String> removeStockFromUser(@PathVariable String user_name,
+                                                 @PathVariable String stock_comp_code) {
+        stockService.removeStockFromUser(stock_comp_code,user_name);
+        return new ResponseEntity<>("OK", HttpStatus.OK);
+    }
 }

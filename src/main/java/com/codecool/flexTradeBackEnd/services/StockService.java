@@ -60,6 +60,20 @@ public class StockService {
         userRepository.save(targetUser);
     }
 
+    public void removeStockFromUser (String stockCodeToRemove, String userName) {
+        User targetUser = userRepository.findByUserName(userName);
+        Set<Stock> userStocks = targetUser.getStocks();
+        System.out.println(userStocks);
+        for (Stock stock : userStocks) {
+            if (Objects.equals(stock.getStockCode(), stockCodeToRemove)) {
+                userStocks.remove(stock);
+            }
+        }
+        System.out.println(userStocks);
+        userRepository.save(targetUser);
+        System.out.println(targetUser.getStocks());
+    }
+
     public boolean checkForStockDataRefresh () {
         List <Stock> stockList = this.getAllStocks();
         /*for (Stock stock : stockList) {
